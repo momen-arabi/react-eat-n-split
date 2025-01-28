@@ -9,6 +9,7 @@
   --color-light: #ffe8cc;
   --color-medium: #ffa94d;
   --color-dark: #ff922b;
+  --text-font: 1.2rem;
 }
 
 * {
@@ -18,7 +19,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 70%;
 }
 
 body {
@@ -28,12 +29,13 @@ body {
   align-items: center;
   justify-content: center;
   font-family: "Poppins", serif;
+  font-size: var(--text-font);
 }
 
 .app {
   min-height: 66vh;
   display: grid;
-  grid-template-columns: 34rem 44rem;
+  grid-template-columns: 38rem 42rem;
   column-gap: 4rem;
   align-items: start;
 }
@@ -58,7 +60,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  font-size: 1.4rem;
   margin-bottom: 2rem;
 }
 
@@ -67,7 +68,6 @@ body {
   grid-template-columns: 4.8rem 1fr auto;
   align-items: center;
   column-gap: 1.6rem;
-
   padding: 1.2rem;
   border-radius: 7px;
   transition: 0.5s;
@@ -113,11 +113,9 @@ body {
 }
 
 form {
-  font-size: 1.6rem;
   display: grid;
   align-items: center;
   gap: 1.2rem;
-
   background-color: var(--color-lightest);
   border-radius: 7px;
 }
@@ -136,17 +134,11 @@ label {
   font-weight: 500;
 }
 
-label::first-letter {
-  display: inline-block;
-  margin-right: 4px;
-  font-size: 1.8rem;
-}
-
-input,
-select {
+.app input,
+.app select {
   font-family: inherit;
   color: inherit;
-  font-size: 1.5rem;
+  font-size: var(--text-font);
   padding: 0.7rem;
   text-align: center;
   border: 1px solid var(--color-light);
@@ -154,9 +146,22 @@ select {
   transition: 0.3s;
 }
 
-input:focus,
-select:focus {
-  outline: none;
+.app input:focus,
+.app select:focus {
+  outline: var(--color-dark);
+  border: 1px solid var(--color-dark);
+}
+
+#who-pays {
+  transition: 0.3s;
+}
+
+#who-pays:hover,
+#who-pays:focus,
+.app input:hover,
+.app input:focus,
+.app select:hover,
+.app select:focus {
   border: 1px solid var(--color-dark);
 }
 
