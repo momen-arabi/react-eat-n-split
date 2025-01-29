@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import SplitBillForm from "./SplitBillForm";
 
-export default function Friend({ friend }) {
+export default function Friend({ friend, onToggleSplitForm, onSelectFriend }) {
   return (
     <li>
       <img src={friend.image} alt={friend.name} />
@@ -17,7 +16,15 @@ export default function Friend({ friend }) {
           You owe {friend.name} {friend.balance * -1}€.
         </p>
       )}
-      <button className="button text-xl">Select</button>
+      <button
+        className="button text-xl"
+        onClick={() => {
+          onToggleSplitForm();
+          onSelectFriend(friend.id);
+        }}
+      >
+        Select
+      </button>
     </li>
   );
 }

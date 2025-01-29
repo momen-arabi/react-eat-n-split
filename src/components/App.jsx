@@ -26,16 +26,25 @@ function App() {
 
   const [friends, setFriends] = useState(initialFriends);
   const [toggleSplitForm, setToggleSplitForm] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState(null);
 
   function onAddFriend(id, name, image) {
     let newFriend = { id, name, image, balance: 0 };
     setFriends((friends) => [...friends, newFriend]);
   }
 
+  function onToggleSplitForm() {
+    setToggleSplitForm((toggle) => !toggle);
+  }
+
+  function onSelectFriend(id) {
+    setSelectedFriend(id);
+  }
+
   return (
     <div className="app p-20">
-      <Sidebar friends={friends} onAddFriend={onAddFriend} />
-      <SplitBillForm />
+      <Sidebar friends={friends} onAddFriend={onAddFriend} onToggleSplitForm={onToggleSplitForm} onSelectFriend={onSelectFriend} />
+      {toggleSplitForm ? <SplitBillForm selectedFriend={selectedFriend} friends={friends} /> : null}
     </div>
   );
 }
