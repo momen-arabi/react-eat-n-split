@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import SplitBillForm from "./SplitBillForm";
 
@@ -23,16 +24,19 @@ function App() {
     },
   ];
 
+  const [friends, setFriends] = useState(initialFriends);
+  const [toggleSplitForm, setToggleSplitForm] = useState(false);
+
+  function onAddFriend(id, name, image) {
+    let newFriend = { id, name, image, balance: 0 };
+    setFriends((friends) => [...friends, newFriend]);
+  }
+
   return (
-    <>
-      <h1 class="mb-20 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-8xl text-center">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r to-orange-700 from-orange-400">Eat'n Split</span>
-      </h1>
-      <div className="app">
-        <Sidebar initialFriends={initialFriends} />
-        <SplitBillForm />
-      </div>
-    </>
+    <div className="app p-20">
+      <Sidebar friends={friends} onAddFriend={onAddFriend} />
+      <SplitBillForm />
+    </div>
   );
 }
 

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import SplitBillForm from "./SplitBillForm";
 
 export default function Friend({ friend }) {
   return (
