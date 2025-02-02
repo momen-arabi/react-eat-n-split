@@ -165,6 +165,19 @@ label {
   border: 1px solid var(--color-dark);
 }
 
+.select__input {
+  display: none;
+}
+
+.select__option:active {
+  background-color: var(--color-dark) !important;
+}
+
+.select__menu-list {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 form .button {
   margin-top: 0.6rem;
   grid-column: 2;
