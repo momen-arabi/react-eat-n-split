@@ -19,7 +19,7 @@ export default function Friend({ friend, onToggleSplitForm, onSelectFriend }) {
       <button
         className="button text-xl"
         onClick={() => {
-          onToggleSplitForm();
+          onToggleSplitForm(friend.id);
           onSelectFriend(friend.id);
         }}
       >

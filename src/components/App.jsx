@@ -33,8 +33,8 @@ function App() {
     setFriends((friends) => [...friends, newFriend]);
   }
 
-  function onToggleSplitForm() {
-    setToggleSplitForm((toggle) => !toggle);
+  function onToggleSplitForm(id) {
+    setToggleSplitForm((toggle) => (id === selectedFriend ? !toggle : toggle));
   }
 
   function onSelectFriend(id) {
