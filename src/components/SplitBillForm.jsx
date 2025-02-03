@@ -3,7 +3,11 @@ import Select from "react-select";
 
 export default function SplitBillForm({ selectedFriend, friends }) {
   let currFriend = friends.find((friend) => friend.id === selectedFriend);
-  const { id, name, image, balance } = currFriend;
+  const { id, name, balance } = currFriend;
+
+  const [billAmt, setBillAmt] = useState(0);
+  const [yourExp, setYourExp] = useState(0);
+  const [friendExp, setFriendExp] = useState(0);
 
   const paymentOptions = [
     { value: "you", label: "You" },
@@ -37,13 +41,43 @@ export default function SplitBillForm({ selectedFriend, friends }) {
 
   return (
     <form className="form-split-bill">
-      <h2 className="font-bold">Split a bill with {name}</h2>
+      <h2>
+        Split a Bill with <span className="font-extrabold">{name}</span>
+      </h2>
       <label htmlFor="bill_value">Bill Value</label>
-      <input type="number" name="bill_value" id="bill_value" className="focus:outline-offset-0 focus:ring-0" />
+      <input
+        type="number"
+        name="bill_value"
+        id="bill_value"
+        className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${billAmt === 0 && "text-gray-400"}`}
+        value={billAmt}
+        onChange={(e) => {
+          if (+e.target.value >= 0) setBillAmt(+e.target.value);
+        }}
+      />
       <label htmlFor="your_expense">Your Expense</label>
-      <input type="number" name="your_expense" id="your_expense" className="focus:outline-offset-0 focus:ring-0" />
+      <input
+        type="number"
+        name="your_expense"
+        id="your_expense"
+        className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${yourExp === 0 && "text-gray-400"}`}
+        value={yourExp}
+        onChange={(e) => {
+          if (+e.target.value >= 0) setYourExp(+e.target.value);
+        }}
+      />
       <label htmlFor="friend_expense">{name}'s Expense</label>
-      <input type="number" name="friend_expense" id="friend_expense" className="focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200" readOnly />
+      <input
+        type="number"
+        name="friend_expense"
+        id="friend_expense"
+        className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${yourExp === 0 && "text-gray-400"}`}
+        value={friendExp}
+        onChange={(e) => {
+          if (+e.target.value >= 0) setFriendExp(+e.target.value);
+        }}
+        readOnly
+      />
       <label htmlFor="who_pays">Who is paying the bill</label>
       <Select
         id="who_pays"
