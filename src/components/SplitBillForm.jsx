@@ -3,11 +3,15 @@ import Select from "react-select";
 
 export default function SplitBillForm({ selectedFriend, friends }) {
   let currFriend = friends.find((friend) => friend.id === selectedFriend);
-  const { id, name, balance } = currFriend;
+  const { name, balance } = currFriend;
 
-  const [billAmt, setBillAmt] = useState(0);
-  const [yourExp, setYourExp] = useState(0);
-  const [friendExp, setFriendExp] = useState(0);
+  const [billAmt, setBillAmt] = useState("");
+  const [yourExp, setYourExp] = useState("");
+  const [friendExp, setFriendExp] = useState("");
+
+  function handleChange(total, your) {
+    setFriendExp(+billAmt === 0 ? "" : +total - +your);
+  }
 
   const paymentOptions = [
     { value: "you", label: "You" },
@@ -52,7 +56,10 @@ export default function SplitBillForm({ selectedFriend, friends }) {
         className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${billAmt === 0 && "text-gray-400"}`}
         value={billAmt}
         onChange={(e) => {
-          if (+e.target.value >= 0) setBillAmt(+e.target.value);
+          if (+e.target.value >= 0) {
+            setBillAmt(+e.target.value);
+            handleChange(e.target.value, yourExp);
+          }
         }}
       />
       <label htmlFor="your_expense">Your Expense</label>
@@ -63,7 +70,10 @@ export default function SplitBillForm({ selectedFriend, friends }) {
         className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${yourExp === 0 && "text-gray-400"}`}
         value={yourExp}
         onChange={(e) => {
-          if (+e.target.value >= 0) setYourExp(+e.target.value);
+          if (+e.target.value >= 0 && +e.target.value <= billAmt) {
+            setYourExp(+e.target.value);
+            handleChange(billAmt, e.target.value);
+          }
         }}
       />
       <label htmlFor="friend_expense">{name}'s Expense</label>
@@ -71,11 +81,8 @@ export default function SplitBillForm({ selectedFriend, friends }) {
         type="number"
         name="friend_expense"
         id="friend_expense"
-        className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${yourExp === 0 && "text-gray-400"}`}
+        className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${friendExp === 0 && "text-gray-400"}`}
         value={friendExp}
-        onChange={(e) => {
-          if (+e.target.value >= 0) setFriendExp(+e.target.value);
-        }}
         readOnly
       />
       <label htmlFor="who_pays">Who is paying the bill</label>
