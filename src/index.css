@@ -187,8 +187,16 @@ form .button {
   grid-column: 2;
 }
 
-form h2 {
+.divider {
+  background-color: #4950571b;
+}
+
+form h2,
+.divider {
   grid-column: 1 / -1;
+}
+
+form h2 {
   font-size: 2.2rem;
   letter-spacing: -0.5px;
   margin-bottom: 1.6rem;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-export default function SplitBillForm({ selectedFriend, friends }) {
+export default function SplitBillForm({ selectedFriend, friends, resetSplitForm }) {
   let currFriend = friends.find((friend) => friend.id === selectedFriend);
   const { name, balance } = currFriend;
 
@@ -10,7 +10,11 @@ export default function SplitBillForm({ selectedFriend, friends }) {
   const [friendExp, setFriendExp] = useState("");
 
   function handleChange(total, your) {
-    setFriendExp(+billAmt === 0 ? "" : +total - +your);
+    if (resetSplitForm) {
+      setBillAmt("");
+      setYourExp("");
+      setFriendExp("");
+    } else setFriendExp(+billAmt === 0 ? "" : +total - +your);
   }
 
   const paymentOptions = [
@@ -45,9 +49,10 @@ export default function SplitBillForm({ selectedFriend, friends }) {
 
   return (
     <form className="form-split-bill">
-      <h2>
+      <h2 className="py-0 my-0">
         Split a Bill with <span className="font-extrabold">{name}</span>
       </h2>
+      <hr className="divider h-px border-0 dark:bg-gray-700" />
       <label htmlFor="bill_value">Bill Value</label>
       <input
         type="number"

@@ -5,21 +5,21 @@ import SplitBillForm from "./SplitBillForm";
 function App() {
   const initialFriends = [
     {
-      id: 118836,
+      id: Math.floor(Math.random() * 90000) + 10000,
       name: "Clark",
-      image: "https://i.pravatar.cc?u=118836",
+      image: `https://i.pravatar.cc?u=${Math.floor(Math.random() * 90000) + 10000}`,
       balance: -7,
     },
     {
-      id: 933372,
+      id: Math.floor(Math.random() * 90000) + 10000,
       name: "Sarah",
-      image: "https://i.pravatar.cc?u=933372",
+      image: `https://i.pravatar.cc?u=${Math.floor(Math.random() * 90000) + 10000}`,
       balance: 20,
     },
     {
-      id: 499476,
+      id: Math.floor(Math.random() * 90000) + 10000,
       name: "Anthony",
-      image: "https://i.pravatar.cc?u=499476",
+      image: `https://i.pravatar.cc?u=${Math.floor(Math.random() * 90000) + 10000}`,
       balance: 0,
     },
   ];
@@ -27,6 +27,7 @@ function App() {
   const [friends, setFriends] = useState(initialFriends);
   const [toggleSplitForm, setToggleSplitForm] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
+  const [resetSplitForm, setResetSplitForm] = useState(true);
 
   function onAddFriend(id, name, image) {
     let newFriend = { id, name, image, balance: 0 };
@@ -34,11 +35,15 @@ function App() {
   }
 
   function onToggleSplitForm(id) {
-    setToggleSplitForm((toggle) => (id === selectedFriend ? !toggle : toggle));
+    setToggleSplitForm((toggle) => (id === selectedFriend || !toggle ? !toggle : toggle));
   }
 
   function onSelectFriend(id) {
     setSelectedFriend(id);
+  }
+
+  function onResetSplitForm() {
+    setResetSplitForm((prev) => !prev);
   }
 
   return (
@@ -50,8 +55,9 @@ function App() {
         onSelectFriend={onSelectFriend}
         selectedFriend={selectedFriend}
         toggleSplitForm={toggleSplitForm}
+        onResetSplitForm={onResetSplitForm}
       />
-      {toggleSplitForm ? <SplitBillForm selectedFriend={selectedFriend} friends={friends} /> : null}
+      {toggleSplitForm ? <SplitBillForm selectedFriend={selectedFriend} friends={friends} resetSplitForm={resetSplitForm} /> : null}
     </div>
   );
 }

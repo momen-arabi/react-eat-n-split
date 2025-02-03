@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Friend from "./Friend";
 import AddFriendForm from "./AddFriendForm";
 
-export default function Sidebar({ friends, onAddFriend, onToggleSplitForm, onSelectFriend, selectedFriend, toggleSplitForm }) {
+export default function Sidebar({ friends, onAddFriend, onToggleSplitForm, onSelectFriend, selectedFriend, toggleSplitForm, onResetSplitForm }) {
   const [toggleForm, setToggleForm] = useState(false);
 
   return (
@@ -16,11 +16,17 @@ export default function Sidebar({ friends, onAddFriend, onToggleSplitForm, onSel
             onSelectFriend={onSelectFriend}
             selectedFriend={selectedFriend}
             toggleSplitForm={toggleSplitForm}
+            onResetSplitForm={onResetSplitForm}
           />
         ))}
       </ul>
       {toggleForm ? <AddFriendForm onAddFriend={onAddFriend} /> : null}
-      <button className="button text-xl" onClick={() => setToggleForm((prev) => !prev)}>
+      <button
+        className="button text-xl"
+        onClick={() => {
+          setToggleForm((prev) => !prev);
+        }}
+      >
         {toggleForm ? "Close" : "Add friend"}
       </button>
     </div>
