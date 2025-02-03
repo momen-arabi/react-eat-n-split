@@ -43,7 +43,14 @@ function App() {
 
   return (
     <div className="app p-20">
-      <Sidebar friends={friends} onAddFriend={onAddFriend} onToggleSplitForm={onToggleSplitForm} onSelectFriend={onSelectFriend} />
+      <Sidebar
+        friends={friends}
+        onAddFriend={onAddFriend}
+        onToggleSplitForm={onToggleSplitForm}
+        onSelectFriend={onSelectFriend}
+        selectedFriend={selectedFriend}
+        toggleSplitForm={toggleSplitForm}
+      />
       {toggleSplitForm ? <SplitBillForm selectedFriend={selectedFriend} friends={friends} /> : null}
     </div>
   );

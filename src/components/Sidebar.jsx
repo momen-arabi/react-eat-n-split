@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import Friend from "./Friend";
 import AddFriendForm from "./AddFriendForm";
 
-export default function Sidebar({ friends, onAddFriend, onToggleSplitForm, onSelectFriend }) {
+export default function Sidebar({ friends, onAddFriend, onToggleSplitForm, onSelectFriend, selectedFriend, toggleSplitForm }) {
   const [toggleForm, setToggleForm] = useState(false);
 
   return (
     <div className="sidebar">
       <ul>
         {friends.map((friend) => (
-          <Friend key={friend.id} friend={friend} onToggleSplitForm={onToggleSplitForm} onSelectFriend={onSelectFriend} />
+          <Friend
+            key={friend.id}
+            friend={friend}
+            onToggleSplitForm={onToggleSplitForm}
+            onSelectFriend={onSelectFriend}
+            selectedFriend={selectedFriend}
+            toggleSplitForm={toggleSplitForm}
+          />
         ))}
       </ul>
       {toggleForm ? <AddFriendForm onAddFriend={onAddFriend} /> : null}
