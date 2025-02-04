@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Friend({ friend, onToggleSplitForm, onSelectFriend, selectedFriend, toggleSplitForm, onResetSplitForm }) {
+export default function Friend({ friend, onToggleSplitForm, onSelectFriend, selectedFriend, toggleSplitForm }) {
   return (
     <li>
       <img src={friend.image} alt={friend.name} />
@@ -21,7 +21,6 @@ export default function Friend({ friend, onToggleSplitForm, onSelectFriend, sele
         onClick={() => {
           onToggleSplitForm(friend.id);
           onSelectFriend(friend.id);
-          onResetSplitForm();
         }}
       >
         {selectedFriend === friend.id && toggleSplitForm ? "Close" : "Select"}

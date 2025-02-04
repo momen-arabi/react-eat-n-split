@@ -27,7 +27,7 @@ function App() {
   const [friends, setFriends] = useState(initialFriends);
   const [toggleSplitForm, setToggleSplitForm] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
-  const [resetSplitForm, setResetSplitForm] = useState(true);
+  const [resetSplitForm, setResetSplitForm] = useState(false);
 
   function onAddFriend(id, name, image) {
     let newFriend = { id, name, image, balance: 0 };
@@ -36,15 +36,14 @@ function App() {
 
   function onToggleSplitForm(id) {
     setToggleSplitForm((toggle) => (id === selectedFriend || !toggle ? !toggle : toggle));
+    setResetSplitForm((toggle) => (id === selectedFriend || !toggle ? !toggle : toggle));
   }
 
   function onSelectFriend(id) {
     setSelectedFriend(id);
   }
 
-  function onResetSplitForm() {
-    setResetSplitForm((prev) => !prev);
-  }
+  // function onResetSplitForm() {}
 
   return (
     <div className="app p-20">
@@ -55,9 +54,10 @@ function App() {
         onSelectFriend={onSelectFriend}
         selectedFriend={selectedFriend}
         toggleSplitForm={toggleSplitForm}
-        onResetSplitForm={onResetSplitForm}
       />
-      {toggleSplitForm ? <SplitBillForm selectedFriend={selectedFriend} friends={friends} resetSplitForm={resetSplitForm} /> : null}
+      {toggleSplitForm ? (
+        <SplitBillForm key={selectedFriend} selectedFriend={selectedFriend} friends={friends} resetSplitForm={resetSplitForm} />
+      ) : null}
     </div>
   );
 }
