@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function AddFriendForm({ onAddFriend }) {
+export default function AddFriendForm({ onAddFriend, onToggleFriendForm }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("https://i.pravatar.cc");
 
@@ -11,6 +11,7 @@ export default function AddFriendForm({ onAddFriend }) {
       onAddFriend(id, name, `${image}?u=${id}`);
       setName("");
       setImage("https://i.pravatar.cc");
+      onToggleFriendForm();
     }
   }
 

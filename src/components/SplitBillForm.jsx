@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-export default function SplitBillForm({ selectedFriend, friends }) {
+export default function SplitBillForm({ selectedFriend, friends, onUpdateFriendBalance, onToggleSplitForm }) {
   let currFriend = friends.find((friend) => friend.id === selectedFriend);
-  const { name, balance } = currFriend;
+  const { id, name, balance } = currFriend;
 
   const [billAmt, setBillAmt] = useState("");
   const [yourExp, setYourExp] = useState("");
   const [friendExp, setFriendExp] = useState("");
-
-  function handleChange(total, your) {
-    setFriendExp(+billAmt === 0 ? "" : +total - +your);
-  }
+  const [whoPays, setWhoPays] = useState("you");
 
   const paymentOptions = [
     { value: "you", label: "You" },
@@ -43,8 +40,23 @@ export default function SplitBillForm({ selectedFriend, friends }) {
     }),
   };
 
+  function handleChange(total, your) {
+    setFriendExp(+billAmt === 0 ? "" : +total - +your);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    let friendBalance = whoPays === "you" ? balance + friendExp : balance - yourExp;
+    onUpdateFriendBalance(id, friendBalance);
+    onToggleSplitForm(id);
+    setBillAmt("");
+    setYourExp("");
+    setFriendExp("");
+    setWhoPays("you");
+  }
+
   return (
-    <form className="form-split-bill">
+    <form className="form-split-bill" onSubmit={(e) => handleSubmit(e)}>
       <h2 className="py-0 my-0">
         Split a Bill with <span className="font-extrabold">{name}</span>
       </h2>
@@ -90,7 +102,8 @@ export default function SplitBillForm({ selectedFriend, friends }) {
       <Select
         id="who_pays"
         options={paymentOptions}
-        defaultValue={paymentOptions[0]}
+        value={paymentOptions.find((option) => option.value === whoPays)}
+        onChange={(selectedOption) => setWhoPays(selectedOption.value)}
         className="basic-select"
         classNamePrefix="select"
         styles={customStyles}

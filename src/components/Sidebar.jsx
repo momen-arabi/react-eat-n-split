@@ -5,6 +5,10 @@ import AddFriendForm from "./AddFriendForm";
 export default function Sidebar({ friends, onAddFriend, onToggleSplitForm, onSelectFriend, selectedFriend, toggleSplitForm }) {
   const [toggleForm, setToggleForm] = useState(false);
 
+  function onToggleFriendForm() {
+    setToggleForm((prev) => !prev);
+  }
+
   return (
     <div className="sidebar">
       <ul>
@@ -19,7 +23,7 @@ export default function Sidebar({ friends, onAddFriend, onToggleSplitForm, onSel
           />
         ))}
       </ul>
-      {toggleForm ? <AddFriendForm onAddFriend={onAddFriend} /> : null}
+      {toggleForm ? <AddFriendForm onAddFriend={onAddFriend} onToggleFriendForm={onToggleFriendForm} /> : null}
       <button
         className="button text-xl"
         onClick={() => {
