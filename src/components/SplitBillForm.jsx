@@ -67,7 +67,7 @@ export default function SplitBillForm({ selectedFriend, friends, onUpdateFriendB
         name="bill_value"
         id="bill_value"
         className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${billAmt === 0 && "text-gray-400"}`}
-        value={billAmt}
+        value={billAmt === 0 ? "" : billAmt}
         onChange={(e) => {
           if (+e.target.value >= 0) {
             setBillAmt(+e.target.value);
@@ -81,7 +81,7 @@ export default function SplitBillForm({ selectedFriend, friends, onUpdateFriendB
         name="your_expense"
         id="your_expense"
         className={`focus:outline-offset-0 focus:ring-0 read-only:bg-gray-200 ${yourExp === 0 && "text-gray-400"}`}
-        value={yourExp}
+        value={yourExp === 0 ? "" : yourExp}
         onChange={(e) => {
           if (+e.target.value >= 0 && +e.target.value <= billAmt) {
             setYourExp(+e.target.value);
