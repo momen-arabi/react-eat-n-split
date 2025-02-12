@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Friend({ friend, onToggleSplitForm, onSelectFriend, selectedFriend, toggleSplitForm }) {
   return (
-    <li>
+    <li className={selectedFriend === friend.id && toggleSplitForm ? "selected" : ""}>
       <img src={friend.image} alt={friend.name} />
       <h3 className="font-bold">{friend.name}</h3>
       {friend.balance > 0 ? (
