@@ -54,24 +54,33 @@ function App() {
   }
 
   return (
-    <div className="app p-20">
-      <Sidebar
-        friends={friends}
-        onAddFriend={onAddFriend}
-        onToggleSplitForm={onToggleSplitForm}
-        onSelectFriend={onSelectFriend}
-        selectedFriend={selectedFriend}
-        toggleSplitForm={toggleSplitForm}
-      />
-      {toggleSplitForm ? (
-        <SplitBillForm
-          key={selectedFriend}
-          selectedFriend={selectedFriend}
+    <div className="flex flex-col items-center">
+      <div className="text-center">
+        <h1 className="text-7xl font-bold text-gray-800 mb-2">
+          Eat<span className="text-[#ff922b]">'n</span>Split
+        </h1>
+        <p className="text-gray-600 text-md">Track and split expenses with friends</p>
+      </div>
+
+      <div className="app p-20">
+        <Sidebar
           friends={friends}
-          onUpdateFriendBalance={onUpdateFriendBalance}
+          onAddFriend={onAddFriend}
           onToggleSplitForm={onToggleSplitForm}
+          onSelectFriend={onSelectFriend}
+          selectedFriend={selectedFriend}
+          toggleSplitForm={toggleSplitForm}
         />
-      ) : null}
+        {toggleSplitForm ? (
+          <SplitBillForm
+            key={selectedFriend}
+            selectedFriend={selectedFriend}
+            friends={friends}
+            onUpdateFriendBalance={onUpdateFriendBalance}
+            onToggleSplitForm={onToggleSplitForm}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
