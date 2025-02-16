@@ -104,7 +104,7 @@ body {
   grid-column: 3;
 }
 
-.sidebar > .button {
+.sidebar > .button:not("#add_friend_btn") {
   float: right;
   margin-right: 1.2rem;
 }

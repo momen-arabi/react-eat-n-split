@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Select from "react-select";
+import { FaReceipt, FaWallet } from "react-icons/fa";
+import { MdPerson } from "react-icons/md";
+import { BsCreditCard2Front } from "react-icons/bs";
 
 export default function SplitBillForm({ selectedFriend, friends, onUpdateFriendBalance, onToggleSplitForm }) {
   let currFriend = friends.find((friend) => friend.id === selectedFriend);
@@ -61,7 +64,10 @@ export default function SplitBillForm({ selectedFriend, friends, onUpdateFriendB
         Split a Bill with <span className="font-extrabold">{name}</span>
       </h2>
       <hr className="divider h-px border-0 dark:bg-gray-700" />
-      <label htmlFor="bill_value">Bill Value</label>
+      <label htmlFor="bill_value" className="flex items-center gap-2">
+        <FaReceipt className="text-orange-500" />
+        Bill Value
+      </label>
       <input
         type="number"
         name="bill_value"
@@ -75,7 +81,10 @@ export default function SplitBillForm({ selectedFriend, friends, onUpdateFriendB
           }
         }}
       />
-      <label htmlFor="your_expense">Your Expense</label>
+      <label htmlFor="your_expense" className="flex items-center gap-2">
+        <FaWallet className="text-orange-500" />
+        Your Expense
+      </label>
       <input
         type="number"
         name="your_expense"
@@ -89,7 +98,10 @@ export default function SplitBillForm({ selectedFriend, friends, onUpdateFriendB
           }
         }}
       />
-      <label htmlFor="friend_expense">{name}'s Expense</label>
+      <label htmlFor="friend_expense" className="flex items-center gap-2">
+        <MdPerson className="text-orange-500" />
+        {name}'s Expense
+      </label>
       <input
         type="number"
         name="friend_expense"
@@ -98,7 +110,10 @@ export default function SplitBillForm({ selectedFriend, friends, onUpdateFriendB
         value={friendExp}
         readOnly
       />
-      <label htmlFor="who_pays">Who is paying the bill</label>
+      <label htmlFor="who_pays" className="flex items-center gap-2">
+        <BsCreditCard2Front className="text-orange-500" />
+        Who is paying the bill
+      </label>
       <Select
         id="who_pays"
         options={paymentOptions}

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FaUser } from "react-icons/fa";
+import { MdImage } from "react-icons/md";
 
 export default function AddFriendForm({ onAddFriend, onToggleFriendForm }) {
   const [name, setName] = useState("");
@@ -17,7 +19,10 @@ export default function AddFriendForm({ onAddFriend, onToggleFriendForm }) {
 
   return (
     <form className="form-add-friend" onSubmit={(e) => handleSubmit(e)}>
-      <label htmlFor="friend_name">Friend Name</label>
+      <label htmlFor="friend_name" className="flex items-center gap-2">
+        <FaUser className="text-orange-500" />
+        Friend Name
+      </label>
       <input
         type="text"
         name="friend_name"
@@ -26,7 +31,10 @@ export default function AddFriendForm({ onAddFriend, onToggleFriendForm }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <label htmlFor="image_url">Image URL</label>
+      <label htmlFor="image_url" className="flex items-center gap-2">
+        <MdImage className="text-orange-500" />
+        Image URL
+      </label>
       <input
         type="text"
         name="image_url"
